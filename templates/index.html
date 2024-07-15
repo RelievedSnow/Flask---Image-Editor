@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block body %}
+  
+
+        <div class="container" style="background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)">
+            <h1>Edit Your Photos.</h1>
+        </div>
+      </div>
+
+      <form action="/edit", method="POST", enctype="multipart/form-data">
+        <div class="container my-5 mb-3">
+            <label for="formFile" class="form-label">Select an Image to Edit</label>
+            <input class="form-control" type="file" name="file" id="formFile">
+          </div>
+
+          <div class="container">
+            <div class="form-floating">
+                <select name="file_type" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                  <option selected>Select Edit Options</option>
+                  <option value="cpng">Convert to PNG</option>
+                  <option value="cgray">Convert to GrayScale</option>
+                  <option value="cwebp">Convert to Webp</option>
+                  <option value="cjpg">Convert to JPG</option>
+                </select>
+                <label for="floatingSelect">Open To Select Edit Type</label>
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm my-3">Submit</button>
+          </div>
+      </form>
+
+      <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+     
+        {% for category, message in messages %} 
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> {{ message | safe}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+
+    {% endif %}
+    {% endwith %}
+      </div>
+    {% endblock body %}
